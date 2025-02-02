@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- 
+    Charset & Viewport:
+    - Ensures proper text encoding and responsiveness across devices.
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+    Content Security Policy:
+    - Helps mitigate XSS and data injection attacks by restricting where resources can load from.
+    - Adjust directives (e.g., style-src) as needed for your setup (inline styles, etc.).
+  -->
+  <meta http-equiv="Content-Security-Policy"
+        content="
+          default-src 'self';
+          style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+          font-src https://fonts.gstatic.com;
+          img-src 'self' data:;
+          script-src 'self' 'unsafe-inline';
+          object-src 'none';
+          connect-src 'self';
+        ">
+
+  <!--
+    Title & Description:
+    - Improve SEO and clarity for your site.
+  -->
+  <title>Evangeline's Website</title>
+  <meta name="description" content="Personal website of Evangeline: showcase, portfolio, and collaborations.">
+
+  <!--
+    Preconnect & Font Import:
+    - Speeds up font loading from Google Fonts.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!--
+    IBM Plex Mono:
+    - Used for text styling in the site
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,500&display=swap" rel="stylesheet">
+
+  <!--
+    Main CSS:
+    - External stylesheet containing all layout, styling, and hover animations.
+  -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- 
+    Main container:
+    - Encapsulates the overall site layout with a fixed border space.
+  -->
+  <div class="main-container">
+
+    <!-- ================== Navbar Container ================== -->
+    <div class="navbar-container">
+      <!-- 
+        Work With Me Icon:
+        - Left link flush against the navbar's left side.
+        - Redirects to "Work with me.html".
+      -->
+      <a href="Work with me.html" class="nav-link left-link">
+        <img src="assets/workwithme.svg" alt="Work With Me" class="nav-icon">
+      </a>
+
+      <!-- 
+        Hello Container:
+        - Positioned near the center link but offset. 
+        - Displays "Hello! I'm".
+      -->
+      <div class="hello-container">
+        <p>Hello! I'm</p>
+      </div>
+
+      <!-- 
+        Evangeline Icon:
+        - Centered in the navbar.
+        - Redirects to "Evangeline's website.html" (the current page).
+      -->
+      <a href="Evangeline's website.html" class="nav-link center-link">
+        <img src="assets/evangeline.svg" alt="Evangeline" class="nav-icon">
+      </a>
+
+      <!-- 
+        My Portfolio Icon:
+        - Positioned near the right side but to the left of the Instagram link.
+        - Redirects to "My portfolio.html".
+      -->
+      <a href="My portfolio.html" class="nav-link myportfolio-link">
+        <img src="assets/myportfolio.svg" alt="My Portfolio" class="nav-icon">
+      </a>
+
+      <!-- 
+        Instagram Icon:
+        - Right link flush against the navbar's right side.
+        - Opens Instagram in a new tab.
+      -->
+      <a href="https://www.instagram.com/evangeline.odibo?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+         target="_blank"
+         rel="noopener noreferrer"
+         class="nav-link right-link">
+        <img src="assets/instagram.svg" alt="Instagram" class="nav-icon">
+      </a>
+    </div>
+    <!-- =============== End Navbar Container ================== -->
+
+
+    <!-- ============= Selector Container (Below Navbar) ============= -->
+    <div class="selector-container"></div>
+
+
+    <!-- =========== Pre1 Container (Above Main Picture) ============ -->
+    <div class="pre1-container">
+      <p>
+        Age : 18&nbsp;&nbsp;&nbsp; Nationality : Switzerland&nbsp;&nbsp;&nbsp; 
+        Heritage : Slovenia / Nigeria&nbsp;&nbsp;&nbsp; Languages : German / English / French
+      </p>
+    </div>
+
+
+    <!-- =========== Main Picture Container (Centered) =========== -->
+    <div class="main-pic-container">
+      <img src="assets/eva_louvre.jpg" alt="Eva Louvre" class="main-pic">
+    </div>
+
+
+    <!-- =========== Pre2 Container (Below Main Picture) =========== -->
+    <div class="pre2-container">
+      <p>
+        Since a young age, I’ve always been independent and focused on my goals. 
+        This determination remains strong today, as I’ve started collaborating 
+        with different photographers and models.
+      </p>
+    </div>
+
+
+    <!-- =============== Footer Container (At Bottom) =============== -->
+    <div class="footer-container">
+      <p>evangeline.odibo@gmail.com</p>
+    </div>
+
+  </div>
+  <!-- =========== End Main Container =========== -->
+
+
+  <!-- ================== 3D Cards Container ================== -->
+  <!-- 
+    Contains the interactive 3D cards with unique blur, parallax translation, 
+    and rotation. They do not interfere with main layout due to absolute positioning.
+  -->
+  <div class="cards-container">
+    <div class="card" id="card1"></div>
+    <div class="card" id="card2"></div>
+    <div class="card" id="card3"></div>
+    <div class="card" id="card4"></div>
+    <div class="card" id="card5"></div>
+  </div>
+  <!-- ================ End 3D Cards Container ================ -->
+
+
+  <!-- =============== JavaScript for 3D cards =============== -->
+  <script>
+    /*
+      This script controls the parallax-like X/Y movement and 3D rotation of the cards.
+      Each card gets a unique multiplier for translation/rotation to create variety.
+    */
+    (function() {
+      const card1 = document.getElementById('card1');
+      const card2 = document.getElementById('card2');
+      const card3 = document.getElementById('card3');
+      const card4 = document.getElementById('card4');
+      const card5 = document.getElementById('card5');
+
+      // Movement / Rotation constraints
+      const maxTranslation = 25; // max px in each axis
+      const maxRotation    = 5;  // max degrees for tilt
+
+      // Individual multipliers for each card
+      const cardConfigs = [
+        { el: card1, xMult: 1.0,  yMult: 1.0,  rxMult: 1.0,  ryMult: 1.0 },
+        { el: card2, xMult: 0.8,  yMult: 0.8,  rxMult: 0.8,  ryMult: 0.8 },
+        { el: card3, xMult: 1.2,  yMult: 1.2,  rxMult: 1.2,  ryMult: 1.2 },
+        { el: card4, xMult: 1.0,  yMult: 1.0,  rxMult: 0.6,  ryMult: 0.6 },
+        { el: card5, xMult: 1.3,  yMult: 0.7,  rxMult: 1.0,  ryMult: 1.0 },
+      ];
+
+      document.addEventListener('mousemove', (e) => {
+        // Mouse coords normalized to [-0.5..0.5]
+        const mouseX = (e.clientX / window.innerWidth) - 0.5;
+        const mouseY = (e.clientY / window.innerHeight) - 0.5;
+
+        cardConfigs.forEach(({ el, xMult, yMult, rxMult, ryMult }) => {
+          // Translate in X & Y
+          const translateX = mouseX * 2 * maxTranslation * xMult;
+          const translateY = mouseY * 2 * maxTranslation * yMult;
+
+          // Rotate around X & Y (negate Y for a natural tilt)
+          const rotateX = -mouseY * 2 * maxRotation * rxMult;
+          const rotateY =  mouseX * 2 * maxRotation * ryMult;
+
+          el.style.transform = `
+            translate3d(${translateX}px, ${translateY}px, 0)
+            rotateX(${rotateX}deg)
+            rotateY(${rotateY}deg)
+          `;
+        });
+      });
+    })();
+  </script>
+  <!-- ============= End JavaScript for 3D cards ============= -->
+</body>
+</html>
