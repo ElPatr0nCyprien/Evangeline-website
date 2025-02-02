@@ -1,0 +1,254 @@
+/* ============ Global Resets & Body Styles ============ */
+/* Remove default browser margins and set sizing */
+html, body {
+  width: calc(100% - 80px);
+  height: calc(180% - 80px);
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrolling (part of the design) */
+}
+
+/* Background Radial Gradient for entire page */
+body {
+  background: radial-gradient(circle at center bottom, #BB35D8 1%, black 60%);
+  font-family: 'IBM Plex Mono', monospace; /* default font for fallback */
+}
+
+
+/* ============ Main Container Layout ============ */
+/*
+  The main container is fixed with a 40px border gap.
+*/
+.main-container {
+  position: fixed;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+}
+
+
+/* ============ Navbar Container ============ */
+/* 
+  Holds the SVG icons and the "Hello! I'm" text.
+  Uses absolute positioning for each link in the nav.
+*/
+.navbar-container {
+  position: relative;
+  height: 25px;
+  width: 100%;
+}
+
+/* Navbar links (shared styles for all) */
+.navbar-container a {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none; /* remove underline */
+}
+
+/* Specific link positions */
+.left-link {   left: 0; }
+.center-link { left: 50%; transform: translateX(-50%); }
+.right-link {  right: 0; }
+.myportfolio-link {
+  /* Position near the right link, adjust spacing as needed */
+  right: 8%;
+}
+
+/* 
+  Hello Container:
+  - Holds "Hello! I'm" text.
+  - Position: absolute near the center link, but can be adjusted as needed.
+*/
+.hello-container {
+  position: absolute;
+  right: 54.5%;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.hello-container p {
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  font-size: 11pt;
+  color: white;
+}
+
+/* Navbar Icons: fill the navbar's height */
+.navbar-container .nav-icon {
+  height: 100%;
+  transition: transform 0.2s ease-in-out; /* for hover pop effect */
+}
+
+/* Hover/Focus "Pop" effect for specific icons (myportfolio, evangeline, workwithme) */
+.myportfolio-link:hover .nav-icon,
+.myportfolio-link:focus .nav-icon,
+.center-link:hover .nav-icon,
+.center-link:focus .nav-icon,
+.left-link:hover .nav-icon,
+.left-link:focus .nav-icon {
+  transform: scale(1.1);
+}
+
+
+/* ============ Selector Container ============ */
+/* Simple bar below the navbar */
+.selector-container {
+  height: 10px;
+  width: 100%;
+  margin-top: 5px;
+}
+
+
+/* ============ Pre1 & Pre2 Containers ============ */
+/* Additional info above and below the main picture */
+
+.pre1-container {
+  width: 800px;
+  height: 30px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(50% - 280px);
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  font-size: 8pt;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.pre2-container {
+  width: 600px;
+  height: 30px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(50% + 250px);
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  font-size: 8pt;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+
+/* ============ Main Picture Container ============ */
+/* A fixed 600x400 box, absolutely centered via translate(-50%, -50%) */
+.main-pic-container {
+  width: 600px;
+  height: 400px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-pic-container .main-pic {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+
+/* ============ Footer Container ============ */
+/* Sits at bottom of main-container (absolute positioning) */
+.footer-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  font-size: 8pt;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+
+/* ============ 3D Cards ============ */
+/*
+  Container is absolutely positioned across full page, enabling
+  parallax illusions over or under main content.
+*/
+.cards-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+  pointer-events: none; /* pass mouse events through to underlying elements */
+}
+
+/* Base card styling:
+   - Each card uses a unique blur, background image, 
+     and position set by ID selectors below.
+*/
+.card {
+  position: absolute;
+  width: 150px;
+  height: 200px;
+  border-radius: 0;
+  opacity: 0.8;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease-out; /* smooth 3D movement/rotation */
+
+  /* Keep background images from previous steps: */
+  background-size: cover;
+  background-position: center;
+}
+
+/* Example unique backgrounds & blur per card */
+#card1 {
+  background-image: url("assets/picture1.jpg");
+  filter: blur(4px);
+  top: 20%;
+  left: 10%;
+}
+#card2 {
+  background-image: url("assets/picture2.jpg");
+  filter: blur(6px);
+  top: 50%;
+  left: 20%;
+}
+#card3 {
+  background-image: url("assets/picture3.jpg");
+  filter: blur(8px);
+  top: 65%;
+  left: 5%;
+}
+#card4 {
+  background-image: url("assets/picture4.jpg");
+  filter: blur(10px);
+  top: 15%;
+  right: 5%;
+}
+#card5 {
+  background-image: url("assets/picture5.jpg");
+  filter: blur(12px);
+  top: 70%;
+  right: 16%;
+}
+
+
+/* ============ General Paragraph Defaults ============ */
+p {
+  margin: 0;
+  text-align: center;
+}
